@@ -1,1 +1,186 @@
-Hello World
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>JavaScript DES Example</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="DESTEST.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<hr>
+<form name="stuff">
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Message</span>
+              </div>
+              <input type="text" value="12345678" name="indata" class="form-control" placeholder="Data" aria-label="Data" aria-describedby="basic-addon1">
+          </div>
+      </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Key</span>
+              </div>
+              <input type="text" name="key" class="form-control" placeholder="Key" aria-label="Data" aria-describedby="basic-addon1">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-primary" onclick="generate_hex_key()">Generate</button>
+              </div>
+            </div>
+        </td>
+      </tr>
+      </tr>
+      <tr>
+        <td>
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Output</span>
+              </div>
+              <input type="text" name="outdata" class="form-control" placeholder="Data" aria-label="Data" aria-describedby="basic-addon1" disabled="true">
+          </div>
+
+          <!-- Radio Buttons Start -->
+          <!-- Default inline 1-->
+          <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" name="destype" onclick="format_DES_output();" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample" checked="true">
+              <label class="custom-control-label" for="defaultInline1">ASCII</label>
+            </div>
+            
+            <!-- Default inline 2-->
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" name="destype" onclick="format_DES_output();" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample">
+              <label class="custom-control-label" for="defaultInline2">HEX</label>
+            </div>
+          <!-- Radio Buttons End-->
+        </td>
+          <tr>
+              <td colspan="2" align="center">
+                  <div class="btn-group" role="group" aria-label="...">
+                      <button type="button" class="btn btn-primary" onclick="do_des(true)">DES Encrypt</button>
+                      <button type="button" class="btn btn-primary" onclick="do_des(false)">DES Decrypt</button>
+                  </div>
+          </td>
+		      </input>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- <div id="keyGen">
+      
+  </div> -->
+<div hidden="true" id="result">
+    <h1>Initial States</h1>
+    <div id="input_bits"></div>
+    <hr>
+    <div id="key_bits"></div>
+    <hr>
+    <h2>Key Generations</h2>
+    <div id="CD0"></div><hr>
+    <div id="CD1"></div><hr>
+    <div id="KS1"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD2"></div><hr>
+    <div id="KS2"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD3"></div><hr>
+    <div id="KS3"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD4"></div><hr>
+    <div id="KS4"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD5"></div><hr>
+    <div id="KS5"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD6"></div><hr>
+    <div id="KS6"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD7"></div><hr>
+    <div id="KS7"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD8"></div><hr>
+    <div id="KS8"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD9"></div><hr>
+    <div id="KS9"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD10"></div><hr>
+    <div id="KS10"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD11"></div><hr>
+    <div id="KS11"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD12"></div><hr>
+    <div id="KS12"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD13"></div><hr>
+    <div id="KS13"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD14"></div><hr>
+    <div id="KS14"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD15"></div><hr>
+    <div id="KS15"></div><hr>
+    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
+    <div id="CD16"></div><hr>
+    <div id="KS16"></div><hr>
+</div>
+
+<!-- <br>
+Details:<br> -->
+  <textarea hidden="true" name="details" id="details" rows="25" cols="90"></textarea>
+<!-- </form>
+<hr>
+<a name="#how" />
+<h2>How DES works</h2>
+Encryption starts with an initial permutation of the 64 input bits.  These bits are then
+divided into two 32-bit halves called L and R.
+The encryption then proceeds through 16 rounds, each using the existing L and R parts, 
+and a <a href="#subkey">subkey</a>.
+The R and subkeys are processed in a function <a href="#ffunc"><i>f</i></a>, and the
+output of the <i>f</i> function are exclusive-or'ed with the existing L part to create
+the new R part.  The new L part is simply a copy of the incoming R part.
+In the final round, the L and R parts are swapped once more before the final permutation
+producing the output block.
+<p>
+Decryption is identical to encryption, except that the subkeys are used in the
+opposite order.  That is, subkey 16 is used in round 1, subkey 15 is used in round 2, etc.,
+ending with subkey 1 being used in round 16.
+<p>
+Here is a diagram of the DES algorithm:<br>
+<img src="DES-gen.GIF" alt="Diagram of DES encryption" width="663" height="783">
+<p>
+<a name="ffunc" />
+<h2>The <i>f</i> function</h2>
+The <i>f</i> function mixes the bits of the R portion using the
+<a href="#subkey">subkey</a> for the current round.
+First the 32-bit R value is expanded to 48 bits using a permutation E.
+That value is then exclusive-or'ed with the subkey.  The 48 bits are then divided into
+eight 6-bit chunks, each of which is fed into a S-Box that mixes the bits and produces
+a 4-bit output.  Those 4-bit outputs are combined into a 32-bit value, and permuted
+once again to produce the <i>f</i>-function output.
+<p>
+<img src="DES-f.GIF" alt="DES F function"
+ style="width: 538px; height: 366px;"><br>
+
+<a name="subkey" />
+<h2>Subkey Generation</h2>
+To generate the subkeys, start with the 56-bit key (64 bits if you include the parity
+bits).  These are permuted and divided into two halves called C and D.
+For each round, C and D are each shifted left circularly one or two bits (the number
+of bits depending on the round).  The 48-bit subkey is then selected from the current
+C and D bits.<br>
+<img src="DES-keygen.GIF"  alt="DES Key Generation Diagram" width="738" height="623">
+<p>
+<hr>
+</body>
+</html> -->
