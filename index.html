@@ -12,6 +12,7 @@
 <hr>
 <form name="stuff">
   <table>
+      <img style="float: right; margin: 0px 0px 0px 0px;" src="graph.png" width="800" height="500"/>
     <tbody>
       <tr>
         <td>
@@ -80,107 +81,344 @@
   </div> -->
 <div hidden="true" id="result">
     <h1>Initial States</h1>
-    <div id="input_bits"></div>
-    <hr>
-    <div id="key_bits"></div>
+    <button type="button" class="btn btn-primary" onclick='showSteps("initial_states")'>Show</button>
+    <div hidden="true" id="initial_states">
+        <div id="input_bits"></div>
+        <hr>
+        <div id="key_bits"></div>
+    </div>
     <hr>
     <h2>Key Generations</h2>
-    <div id="CD0"></div><hr>
-    <div id="CD1"></div><hr>
-    <div id="KS1"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD2"></div><hr>
-    <div id="KS2"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD3"></div><hr>
-    <div id="KS3"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD4"></div><hr>
-    <div id="KS4"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD5"></div><hr>
-    <div id="KS5"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD6"></div><hr>
-    <div id="KS6"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD7"></div><hr>
-    <div id="KS7"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD8"></div><hr>
-    <div id="KS8"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD9"></div><hr>
-    <div id="KS9"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD10"></div><hr>
-    <div id="KS10"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD11"></div><hr>
-    <div id="KS11"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD12"></div><hr>
-    <div id="KS12"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD13"></div><hr>
-    <div id="KS13"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD14"></div><hr>
-    <div id="KS14"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD15"></div><hr>
-    <div id="KS15"></div><hr>
-    <img src="arrow.jpg" alt="Trulli" width="100" height="100">
-    <div id="CD16"></div><hr>
-    <div id="KS16"></div><hr>
+    <button type="button" class="btn btn-primary" onclick='showSteps("key_results")'>Show</button>
+    <div hidden="true" id="key_results">
+        <div id="CD0"></div><hr>
+
+        <button type="button" onclick='showSteps("key1")'>Key 1</button>
+        <button type="button" onclick='showSteps("key2")'>Key 2</button>
+        <button type="button" onclick='showSteps("key3")'>Key 3</button>
+        <button type="button" onclick='showSteps("key4")'>Key 4</button>
+        <button type="button" onclick='showSteps("key5")'>Key 5</button>
+        <button type="button" onclick='showSteps("key6")'>Key 6</button>
+        <button type="button" onclick='showSteps("key7")'>Key 7</button>
+        <button type="button" onclick='showSteps("key8")'>Key 8</button>
+        <button type="button" onclick='showSteps("key9")'>Key 9</button>
+        <button type="button" onclick='showSteps("key10")'>Key 10</button>
+        <button type="button" onclick='showSteps("key11")'>Key 11</button>
+        <button type="button" onclick='showSteps("key12")'>Key 12</button>
+        <button type="button" onclick='showSteps("key13")'>Key 13</button>
+        <button type="button" onclick='showSteps("key14")'>Key 14</button>
+        <button type="button" onclick='showSteps("key15")'>Key 15</button>
+        <button type="button" onclick='showSteps("key16")'>Key 16</button>
+
+        <div hidden="true" id="key1">
+          <div id="CD1"></div>
+          <div id="KS1"></div><hr>
+        </div>
+        
+        <div hidden="true" id="key2">
+        <div id="CD2"></div><hr>
+        <div id="KS2"></div><hr>
+        </div>
+        
+        <div hidden="true" id="key3">
+        <div id="CD3"></div><hr>
+        <div id="KS3"></div><hr>
+        </div>
+        
+        <div hidden="true" id="key4">
+        <div id="CD4"></div><hr>
+        <div id="KS4"></div><hr>
+        </div>
+        
+        <div hidden="true" id="key5">
+        <div id="CD5"></div><hr>
+        <div id="KS5"></div><hr>
+        </div>
+
+        <div hidden="true" id="key6">
+        <div id="CD6"></div><hr>
+        <div id="KS6"></div><hr>
+        </div>
+
+        <div hidden="true" id="key7">
+        <div id="CD7"></div><hr>
+        <div id="KS7"></div><hr>
+        </div>
+
+        <div hidden="true" id="key8">
+        <div id="CD8"></div><hr>
+        <div id="KS8"></div><hr>
+        </div>
+
+        <div hidden="true" id="key9">
+        <div id="CD9"></div><hr>
+        <div id="KS9"></div><hr>
+        </div>
+
+        <div hidden="true" id="key10">
+        <div id="CD10"></div><hr>
+        <div id="KS10"></div><hr>
+        </div>
+
+        <div hidden="true" id="key11">
+        <div id="CD11"></div><hr>
+        <div id="KS11"></div><hr>
+        </div>
+
+        <div hidden="true" id="key12">
+        <div id="CD12"></div><hr>
+        <div id="KS12"></div><hr>
+        </div>
+
+        <div hidden="true" id="key13">
+        <div id="CD13"></div><hr>
+        <div id="KS13"></div><hr>
+        </div>
+            
+        <div hidden="true" id="key14">
+        <div id="CD14"></div><hr>
+        <div id="KS14"></div><hr>
+        </div>
+
+        <div hidden="true" id="key15">
+        <div id="CD15"></div><hr>
+        <div id="KS15"></div><hr>
+        </div>
+            
+        <div hidden="true" id="key16">
+        <div id="CD16"></div><hr>
+        <div id="KS16"></div><hr>
+        </div>
+    </div>
+    <hr>
+    <h3>Rounds</h3>
+    <button type="button" class="btn btn-primary" onclick='showSteps("round_16_results")'>Show</button>
+    <div hidden="true" id="round_16_results">
+
+        <div id="IP"></div><hr>
+        <div id="Left0"></div><hr>
+        <div id="Right0"></div><hr>
+
+        <button type="button" onclick='showSteps("round1")'>Round 1</button>
+        <button type="button" onclick='showSteps("round2")'>Round 2</button>
+        <button type="button" onclick='showSteps("round3")'>Round 3</button>
+        <button type="button" onclick='showSteps("round4")'>Round 4</button>
+        <button type="button" onclick='showSteps("round5")'>Round 5</button>
+        <button type="button" onclick='showSteps("round6")'>Round 6</button>
+        <button type="button" onclick='showSteps("round7")'>Round 7</button>
+        <button type="button" onclick='showSteps("round8")'>Round 8</button>
+        <button type="button" onclick='showSteps("round9")'>Round 9</button>
+        <button type="button" onclick='showSteps("round10")'>Round 10</button>
+        <button type="button" onclick='showSteps("round11")'>Round 11</button>
+        <button type="button" onclick='showSteps("round12")'>Round 12</button>
+        <button type="button" onclick='showSteps("round13")'>Round 13</button>
+        <button type="button" onclick='showSteps("round14")'>Round 14</button>
+        <button type="button" onclick='showSteps("round15")'>Round 15</button>
+        <button type="button" onclick='showSteps("round16")'>Round 16</button>
+        <img style="float: right; margin: 0px 0px 30px 30px;" src="Roundsteps.png" width="500" />
+        <div hidden="true" id="round1">
+          <h5>Round 1:</h5>
+          <div id="E1"></div><hr>
+          <div id="KEY1"></div><hr>
+          <div id="ExorKEY1"></div><hr>
+          <div id="SBOX1"></div><hr>
+          <div id="PERM1"></div><hr>
+          <div id="PERMxorL1"></div><hr>
+          <div id="Left1"></div><hr>
+          <div id="Right1"></div><hr>
+        </div>
+
+        <div hidden="true" id="round2">
+          <h5>Round 2:</h5>
+          <div id="E2"></div><hr>
+          <div id="KEY2"></div><hr>
+          <div id="ExorKEY2"></div><hr>
+          <div id="SBOX2"></div><hr>
+          <div id="PERM2"></div><hr>
+          <div id="PERMxorL2"></div><hr>
+          <div id="Left2"></div><hr>
+          <div id="Right2"></div><hr>
+        </div>
+
+        <div hidden="true" id="round3">
+          <h5>Round 3:</h5>
+          <div id="E3"></div><hr>
+          <div id="KEY3"></div><hr>
+          <div id="ExorKEY3"></div><hr>
+          <div id="SBOX3"></div><hr>
+          <div id="PERM3"></div><hr>
+          <div id="PERMxorL3"></div><hr>
+          <div id="Left3"></div><hr>
+          <div id="Right3"></div><hr>
+        </div>
+
+        <div hidden="true" id="round4">
+          <h5>Round 4:</h5>
+          <div id="E4"></div><hr>
+          <div id="KEY4"></div><hr>
+          <div id="ExorKEY4"></div><hr>
+          <div id="SBOX4"></div><hr>
+          <div id="PERM4"></div><hr>
+          <div id="PERMxorL4"></div><hr>
+          <div id="Left4"></div><hr>
+          <div id="Right4"></div><hr>
+        </div>
+
+        <div hidden="true" id="round5">
+          <h5>Round 5:</h5>
+          <div id="E5"></div><hr>
+          <div id="KEY5"></div><hr>
+          <div id="ExorKEY5"></div><hr>
+          <div id="SBOX5"></div><hr>
+          <div id="PERM5"></div><hr>
+          <div id="PERMxorL5"></div><hr>
+          <div id="Left5"></div><hr>
+          <div id="Right5"></div><hr>
+        </div>
+
+        <div hidden="true" id="round6">
+          <h5>Round 6:</h5>
+          <div id="E6"></div><hr>
+          <div id="KEY6"></div><hr>
+          <div id="ExorKEY6"></div><hr>
+          <div id="SBOX6"></div><hr>
+          <div id="PERM6"></div><hr>
+          <div id="PERMxorL6"></div><hr>
+          <div id="Left6"></div><hr>
+          <div id="Right6"></div><hr>
+        </div>
+
+        <div hidden="true" id="round7">
+          <h5>Round 7:</h5>
+          <div id="E7"></div><hr>
+          <div id="KEY7"></div><hr>
+          <div id="ExorKEY7"></div><hr>
+          <div id="SBOX7"></div><hr>
+          <div id="PERM7"></div><hr>
+          <div id="PERMxorL7"></div><hr>
+          <div id="Left7"></div><hr>
+          <div id="Right7"></div><hr>
+        </div>
+
+        <div hidden="true" id="round8">
+          <h5>Round 8:</h5>
+          <div id="E8"></div><hr>
+          <div id="KEY8"></div><hr>
+          <div id="ExorKEY8"></div><hr>
+          <div id="SBOX8"></div><hr>
+          <div id="PERM8"></div><hr>
+          <div id="PERMxorL8"></div><hr>
+          <div id="Left8"></div><hr>
+          <div id="Right8"></div><hr>
+        </div>
+
+        <div hidden="true" id="round9">
+          <h5>Round 9:</h5>
+          <div id="E9"></div><hr>
+          <div id="KEY9"></div><hr>
+          <div id="ExorKEY9"></div><hr>
+          <div id="SBOX9"></div><hr>
+          <div id="PERM9"></div><hr>
+          <div id="PERMxorL9"></div><hr>
+          <div id="Left9"></div><hr>
+          <div id="Right9"></div><hr>
+        </div>
+
+        <div hidden="true" id="round10">
+          <h5>Round 10:</h5>
+          <div id="E10"></div><hr>
+          <div id="KEY10"></div><hr>
+          <div id="ExorKEY10"></div><hr>
+          <div id="SBOX10"></div><hr>
+          <div id="PERM10"></div><hr>
+          <div id="PERMxorL10"></div><hr>
+          <div id="Left10"></div><hr>
+          <div id="Right10"></div><hr>
+        </div>
+
+        <div hidden="true" id="round11">
+          <h5>Round 11:</h5>
+          <div id="E11"></div><hr>
+          <div id="KEY11"></div><hr>
+          <div id="ExorKEY11"></div><hr>
+          <div id="SBOX11"></div><hr>
+          <div id="PERM11"></div><hr>
+          <div id="PERMxorL11"></div><hr>
+          <div id="Left11"></div><hr>
+          <div id="Right11"></div><hr>
+        </div>
+
+        <div hidden="true" id="round12">
+          <h5>Round 12:</h5>
+          <div id="E12"></div><hr>
+          <div id="KEY12"></div><hr>
+          <div id="ExorKEY12"></div><hr>
+          <div id="SBOX12"></div><hr>
+          <div id="PERM12"></div><hr>
+          <div id="PERMxorL12"></div><hr>
+          <div id="Left12"></div><hr>
+          <div id="Right12"></div><hr>
+        </div>
+
+        <div hidden="true" id="round13">
+          <h5>Round 13:</h5>
+          <div id="E13"></div><hr>
+          <div id="KEY13"></div><hr>
+          <div id="ExorKEY13"></div><hr>
+          <div id="SBOX13"></div><hr>
+          <div id="PERM13"></div><hr>
+          <div id="PERMxorL13"></div><hr>
+          <div id="Left13"></div><hr>
+          <div id="Right13"></div><hr>
+        </div>
+
+        <div hidden="true" id="round14">
+          <h5>Round 14:</h5>
+          <div id="E14"></div><hr>
+          <div id="KEY14"></div><hr>
+          <div id="ExorKEY14"></div><hr>
+          <div id="SBOX14"></div><hr>
+          <div id="PERM14"></div><hr>
+          <div id="PERMxorL14"></div><hr>
+          <div id="Left14"></div><hr>
+          <div id="Right14"></div><hr>
+        </div>
+
+        <div hidden="true" id="round15">
+          <h5>Round 15:</h5>
+          <div id="E15"></div><hr>
+          <div id="KEY15"></div><hr>
+          <div id="ExorKEY15"></div><hr>
+          <div id="SBOX15"></div><hr>
+          <div id="PERM15"></div><hr>
+          <div id="PERMxorL15"></div><hr>
+          <div id="Left15"></div><hr>
+          <div id="Right15"></div><hr>
+        </div>
+
+        <div hidden="true" id="round16">
+          <h5>Round 16:</h5>
+          <div id="E16"></div><hr>
+          <div id="KEY16"></div><hr>
+          <div id="ExorKEY16"></div><hr>
+          <div id="SBOX16"></div><hr>
+          <div id="PERM16"></div><hr>
+          <div id="PERMxorL16"></div><hr>
+          <div id="Left16"></div><hr>
+          <div id="Right16"></div><hr>
+        </div>
+        <br style="clear:both" />
+    </div>
+    <hr>
+
+    <h3>Final States</h3>
+    <button type="button" class="btn btn-primary" onclick='showSteps("final_states")'>Show</button>
+
+    <div hidden="true" id="final_states">
+        <div id="L_R"></div>
+        <hr>
+        <div id="output"></div>
+    </div>
 </div>
 
-<!-- <br>
-Details:<br> -->
-  <textarea hidden="true" name="details" id="details" rows="25" cols="90"></textarea>
-<!-- </form>
-<hr>
-<a name="#how" />
-<h2>How DES works</h2>
-Encryption starts with an initial permutation of the 64 input bits.  These bits are then
-divided into two 32-bit halves called L and R.
-The encryption then proceeds through 16 rounds, each using the existing L and R parts, 
-and a <a href="#subkey">subkey</a>.
-The R and subkeys are processed in a function <a href="#ffunc"><i>f</i></a>, and the
-output of the <i>f</i> function are exclusive-or'ed with the existing L part to create
-the new R part.  The new L part is simply a copy of the incoming R part.
-In the final round, the L and R parts are swapped once more before the final permutation
-producing the output block.
-<p>
-Decryption is identical to encryption, except that the subkeys are used in the
-opposite order.  That is, subkey 16 is used in round 1, subkey 15 is used in round 2, etc.,
-ending with subkey 1 being used in round 16.
-<p>
-Here is a diagram of the DES algorithm:<br>
-<img src="DES-gen.GIF" alt="Diagram of DES encryption" width="663" height="783">
-<p>
-<a name="ffunc" />
-<h2>The <i>f</i> function</h2>
-The <i>f</i> function mixes the bits of the R portion using the
-<a href="#subkey">subkey</a> for the current round.
-First the 32-bit R value is expanded to 48 bits using a permutation E.
-That value is then exclusive-or'ed with the subkey.  The 48 bits are then divided into
-eight 6-bit chunks, each of which is fed into a S-Box that mixes the bits and produces
-a 4-bit output.  Those 4-bit outputs are combined into a 32-bit value, and permuted
-once again to produce the <i>f</i>-function output.
-<p>
-<img src="DES-f.GIF" alt="DES F function"
- style="width: 538px; height: 366px;"><br>
-
-<a name="subkey" />
-<h2>Subkey Generation</h2>
-To generate the subkeys, start with the 56-bit key (64 bits if you include the parity
-bits).  These are permuted and divided into two halves called C and D.
-For each round, C and D are each shifted left circularly one or two bits (the number
-of bits depending on the round).  The 48-bit subkey is then selected from the current
-C and D bits.<br>
-<img src="DES-keygen.GIF"  alt="DES Key Generation Diagram" width="738" height="623">
-<p>
-<hr>
-</body>
-</html> -->
+<textarea hidden="true" name="details" id="details" rows="25" cols="90"></textarea>

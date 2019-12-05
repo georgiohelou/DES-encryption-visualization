@@ -313,7 +313,7 @@ function do_S( SBox, index, inbits )
 }
 
 // do one round of DES encryption
-function des_round( L, R, KeyR )
+function des_round( L, R, KeyR, index )
 {
    var E_result = new Array( 49 );
    var S_out = new Array( 33 );
@@ -332,11 +332,14 @@ function des_round( L, R, KeyR )
    // expand R using E permutation
    permute( E_result, R, E_perm );
    accumulate_bitstring( "E   : ", E_result, 6 );
+   printBitsTable(E_result,"E"+index+": After E Permutation","E"+index)
    accumulate_bitstring( "KS  : ", KeyR, 6 );
+   printBitsTable(KeyR,"Key "+ index,"KEY"+index)
 
    // exclusive-or with current key
    xor( E_result, KeyR );
    accumulate_bitstring( "E xor KS: ", E_result, 6 );
+   printBitsTable(E_result,"E"+index+" XOR Key"+index,"ExorKEY"+index)
 
    // put through the S-Boxes
    split_int( S_out,  1, 4, do_S( S1,  1, E_result ) );
@@ -348,15 +351,21 @@ function des_round( L, R, KeyR )
    split_int( S_out, 25, 4, do_S( S7, 37, E_result ) );
    split_int( S_out, 29, 4, do_S( S8, 43, E_result ) );
    accumulate_bitstring( "Sbox: ", S_out, 4 );
+   printBitsTable(S_out,"S"+index+": After SBox","SBOX"+index)
 
    // do the P permutation
    permute( R, S_out, P_perm );
    accumulate_bitstring( "P   :", R, 8 );
+   printBitsTable(R,"P"+index+": After Permutation","PERM"+index)
 
    // xor this with old L to get the new R
    xor( R, temp_L );
+   printBitsTable(R,"P"+index+" XOR L"+(index-1),"PERMxorL"+index)
+
    accumulate_bitstring( "L[i]:", L, 8 );
+   printBitsTable(L,"Left"+index, "Left"+index)
    accumulate_bitstring( "R[i]:", R, 8 );
+   printBitsTable(R,"Right"+index, "Right"+index)
 }
 
 // shift the CD values left 1 bit
@@ -434,6 +443,7 @@ function des_encrypt( inData, Key, do_encrypt )
 
    // handle the initial permutation
    permute( tempData, inData, IP_perm );
+   printBitsTable(tempData,"Initial Permutation","IP");
 
    // split data into L/R parts
    for( i=1; i<=32; i++ )
@@ -442,7 +452,9 @@ function des_encrypt( inData, Key, do_encrypt )
       R[i] = tempData[i+32];
    }
    accumulate_bitstring( "L[0]: ", L, 8 );
+   printBitsTable(L,"Left[0]","Left0");
    accumulate_bitstring( "R[0]: ", R, 8 );
+   printBitsTable(R,"Right[0]","Right0");
 
    // encrypting or decrypting?
    if ( do_encrypt )
@@ -451,7 +463,7 @@ function des_encrypt( inData, Key, do_encrypt )
       for( i=1; i<=16; i++ )
       {
          accumulate_output( "Round " + i );
-         des_round( L, R, KS[i] );
+         des_round( L, R, KS[i], i );
       }
    }
    else
@@ -460,7 +472,7 @@ function des_encrypt( inData, Key, do_encrypt )
       for( i=16; i>=1; i-- )
       {
          accumulate_output( "Round " + (17-i) );
-         des_round( L, R, KS[i] );
+         des_round( L, R, KS[i], i );
       }
    }
 
@@ -472,9 +484,11 @@ function des_encrypt( inData, Key, do_encrypt )
       tempData[i+32] = L[i];
    }
    accumulate_bitstring ("LR[16] ", tempData, 8 );
+   printBitsTable(tempData,"R16 || L16","L_R");
 
    // do final permutation and return result
    permute( result, tempData, FP_perm );
+   printBitsTable(result,"Output (After Final Permutation)","output")
    return result;
 }
 
@@ -490,6 +504,7 @@ function generate_hex_key()
 // do_encrypt is TRUE for encrypt, FALSE for decrypt
 function do_des( do_encrypt )
 {
+   clearAll();
    var inData = new Array( 65 );	// input message bits
    var Key = new Array( 65 );
 
@@ -541,6 +556,34 @@ function printBitsTable(bits,title,id){
     content+="</tr></table>"
 
     $('#'+id).append(content);
+}
+
+function showSteps(id){
+    var isHidden=$('#'+id).attr("hidden");
+
+    if(isHidden)$('#'+id).attr("hidden",false); 
+    else $('#'+id).attr("hidden",true);
+}
+
+function clearAll(){
+   $('#input_bits').empty();
+   $('#key_bits').empty();
+   $('#IP').empty();
+   $('#L_R').empty();
+   $('#output').empty();
+
+   for(i=0; i<17; i++){
+      $('#CD'+i).empty();
+      $('#KS'+i).empty();
+      $('#Left'+i).empty();
+      $('#Right'+i).empty();
+      $('#E'+i).empty();
+      $('#KEY'+i).empty();
+      $('#ExorKEY'+i).empty();
+      $('#SBOX'+i).empty();
+      $('#PERM'+i).empty();
+      $('#PERMxorL'+i).empty();
+   }
 }
 
 // do Triple-DES encrytion/decryption
