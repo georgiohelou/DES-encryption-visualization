@@ -3,14 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>JavaScript DES Example</title>
+  <title>DES Encryption/decryption</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="DESTEST.js"></script>
+  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-<hr>
-<form name="stuff">
+  <h1 align="center" style="background-color: #017AFE; color: white; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">DES ENCRYPTION/DECRYPTION</h1>
+  <p align="center" style="margin-top:-1%; background-color: #017AFE; color: white; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">by Paul Adaimi, Georgio El Helou and Karim Bou Younes</p>
+  <form name="stuff">
   <table>
       <img style="float: right; margin: 0px 0px 0px 0px;" src="graph.png" width=60% height=60%/>
     <tbody>
@@ -80,7 +83,7 @@
       
   </div> -->
 <div hidden="true" id="result">
-    <h1>Initial States</h1>
+    <h2>Initial States</h2>
     <button type="button" class="btn btn-primary" onclick='showSteps("initial_states")'>Show</button>
     <div hidden="true" id="initial_states">
         <div id="input_bits"></div>
@@ -93,6 +96,7 @@
     <div hidden="true" id="key_results">
         <div id="CD0"></div><hr>
 
+        <img style="float: right; margin: 0px 0px 30px 30px;" src="Key_Gen.jpg" width=20% height="40%" />
         <button type="button" onclick='showSteps("key1")'>Key 1</button>
         <button type="button" onclick='showSteps("key2")'>Key 2</button>
         <button type="button" onclick='showSteps("key3")'>Key 3</button>
@@ -111,87 +115,103 @@
         <button type="button" onclick='showSteps("key16")'>Key 16</button>
 
         <div hidden="true" id="key1">
-          <div id="CD1"></div>
+          <h5>Key 1:</h5>
+          <div id="CD1"></div><hr>
           <div id="KS1"></div><hr>
         </div>
         
         <div hidden="true" id="key2">
-        <div id="CD2"></div><hr>
-        <div id="KS2"></div><hr>
+          <h5>Key 2:</h5>
+          <div id="CD2"></div><hr>
+          <div id="KS2"></div><hr>
         </div>
         
         <div hidden="true" id="key3">
-        <div id="CD3"></div><hr>
-        <div id="KS3"></div><hr>
+          <h5>Key 3:</h5>
+          <div id="CD3"></div><hr>
+          <div id="KS3"></div><hr>
         </div>
         
         <div hidden="true" id="key4">
-        <div id="CD4"></div><hr>
-        <div id="KS4"></div><hr>
+          <h5>Key 4:</h5>
+          <div id="CD4"></div><hr>
+          <div id="KS4"></div><hr>
         </div>
         
         <div hidden="true" id="key5">
-        <div id="CD5"></div><hr>
-        <div id="KS5"></div><hr>
+          <h5>Key 5:</h5>
+          <div id="CD5"></div><hr>
+          <div id="KS5"></div><hr>
         </div>
 
         <div hidden="true" id="key6">
-        <div id="CD6"></div><hr>
-        <div id="KS6"></div><hr>
+          <h5>Key 6:</h5>
+          <div id="CD6"></div><hr>
+          <div id="KS6"></div><hr>
         </div>
 
         <div hidden="true" id="key7">
-        <div id="CD7"></div><hr>
-        <div id="KS7"></div><hr>
+          <h5>Key 7:</h5>
+          <div id="CD7"></div><hr>
+          <div id="KS7"></div><hr>
         </div>
 
         <div hidden="true" id="key8">
-        <div id="CD8"></div><hr>
-        <div id="KS8"></div><hr>
+          <h5>Key 8:</h5>
+          <div id="CD8"></div><hr>
+          <div id="KS8"></div><hr>
         </div>
 
         <div hidden="true" id="key9">
-        <div id="CD9"></div><hr>
-        <div id="KS9"></div><hr>
+          <h5>Key 9:</h5>
+          <div id="CD9"></div><hr>
+          <div id="KS9"></div><hr>
         </div>
 
         <div hidden="true" id="key10">
-        <div id="CD10"></div><hr>
-        <div id="KS10"></div><hr>
+          <h5>Key 10:</h5>
+          <div id="CD10"></div><hr>
+          <div id="KS10"></div><hr>
         </div>
 
         <div hidden="true" id="key11">
-        <div id="CD11"></div><hr>
-        <div id="KS11"></div><hr>
+          <h5>Key 11:</h5>
+          <div id="CD11"></div><hr>
+          <div id="KS11"></div><hr>
         </div>
 
         <div hidden="true" id="key12">
-        <div id="CD12"></div><hr>
-        <div id="KS12"></div><hr>
+          <h5>Key 12:</h5>
+          <div id="CD12"></div><hr>
+          <div id="KS12"></div><hr>
         </div>
 
         <div hidden="true" id="key13">
-        <div id="CD13"></div><hr>
-        <div id="KS13"></div><hr>
+          <h5>Key 13:</h5>
+          <div id="CD13"></div><hr>
+          <div id="KS13"></div><hr>
         </div>
             
         <div hidden="true" id="key14">
-        <div id="CD14"></div><hr>
-        <div id="KS14"></div><hr>
+          <h5>Key 14:</h5>
+          <div id="CD14"></div><hr>
+          <div id="KS14"></div><hr>
         </div>
 
         <div hidden="true" id="key15">
-        <div id="CD15"></div><hr>
-        <div id="KS15"></div><hr>
+          <h5>Key 15:</h5>
+          <div id="CD15"></div><hr>
+          <div id="KS15"></div><hr>
         </div>
             
         <div hidden="true" id="key16">
-        <div id="CD16"></div><hr>
-        <div id="KS16"></div><hr>
+          <h5>Key 16:</h5>
+          <div id="CD16"></div><hr>
+          <div id="KS16"></div><hr>
         </div>
     </div>
     <hr>
-    <h3>Rounds</h3>
+    <h2>Rounds</h2>
     <button type="button" class="btn btn-primary" onclick='showSteps("round_16_results")'>Show</button>
     <div hidden="true" id="round_16_results">
 
@@ -411,7 +431,7 @@
     </div>
     <hr>
 
-    <h3>Final States</h3>
+    <h2>Final States</h2>
     <button type="button" class="btn btn-primary" onclick='showSteps("final_states")'>Show</button>
 
     <div hidden="true" id="final_states">
@@ -421,7 +441,6 @@
     </div>
 </div>
 
-<textarea hidden="true" name="details" id="details" rows="25" cols="90"></textarea>
 </form>
 </body>
 </html>

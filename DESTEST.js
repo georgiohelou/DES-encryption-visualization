@@ -1,32 +1,3 @@
-
-// accumulate values to put into text area
-var accumulated_output_info;
-
-// add a labeled value to the text area
-function accumulate_output( str )
-{
-   accumulated_output_info = accumulated_output_info + str + "\n";
-}
-
-// add a bit string to the output, inserting spaces as designated
-function accumulate_bitstring( label, ary, spacing )
-{
-   var i;
-
-   accumulated_output_info += label;
-
-   // add bits
-   for( i=1; i<ary.length; i++ )
-   {
-      if ( (i%spacing) == 1 )
-         accumulated_output_info += " ";	// time to add a space
-      accumulated_output_info += ary[i];	// and the bit
-   }
-
-   // insert trailing end-of-line
-   accumulated_output_info += "\n";
-}
-
 // special value stored in x[0] to indicate a problem
 var ERROR_VAL = -9876;
 
@@ -331,14 +302,11 @@ function des_round( L, R, KeyR, index )
 
    // expand R using E permutation
    permute( E_result, R, E_perm );
-   accumulate_bitstring( "E   : ", E_result, 6 );
    printBitsTable(E_result,"E"+index+": After E Permutation","E"+index)
-   accumulate_bitstring( "KS  : ", KeyR, 6 );
    printBitsTable(KeyR,"Key "+ index,"KEY"+index)
 
    // exclusive-or with current key
    xor( E_result, KeyR );
-   accumulate_bitstring( "E xor KS: ", E_result, 6 );
    printBitsTable(E_result,"E"+index+" XOR Key"+index,"ExorKEY"+index)
 
    // put through the S-Boxes
@@ -350,22 +318,18 @@ function des_round( L, R, KeyR, index )
    split_int( S_out, 21, 4, do_S( S6, 31, E_result ) );
    split_int( S_out, 25, 4, do_S( S7, 37, E_result ) );
    split_int( S_out, 29, 4, do_S( S8, 43, E_result ) );
-   accumulate_bitstring( "Sbox: ", S_out, 4 );
    printBitsTable(S_out,"S"+index+": After SBox","SBOX"+index)
 
    // do the P permutation
    permute( R, S_out, P_perm );
-   accumulate_bitstring( "P   :", R, 8 );
    printBitsTable(R,"P"+index+": After Permutation","PERM"+index)
 
    // xor this with old L to get the new R
    xor( R, temp_L );
-   printBitsTable(R,"P"+index+" XOR L"+(index-1),"PERMxorL"+index)
+   printBitsTable(R,"P"+index+" XOR Left["+(index-1)+"]","PERMxorL"+index)
 
-   accumulate_bitstring( "L[i]:", L, 8 );
-   printBitsTable(L,"Left"+index, "Left"+index)
-   accumulate_bitstring( "R[i]:", R, 8 );
-   printBitsTable(R,"Right"+index, "Right"+index)
+   printBitsTable(L,"Left["+index+"]", "Left"+index)
+   printBitsTable(R,"Right{"+index+"]", "Right"+index)
 }
 
 // shift the CD values left 1 bit
@@ -415,7 +379,6 @@ function des_encrypt( inData, Key, do_encrypt )
 
    // do the initial key permutation
    permute( CD, Key, PC_1_perm );
-   accumulate_bitstring( "CD[0]: ", CD, 7 );
    printBitsTable(CD,"CD0: After Permute Choice 1","CD0")
 
    // create the subkeys
@@ -433,17 +396,15 @@ function des_encrypt( inData, Key, do_encrypt )
          shift_CD_2( CD );
          printBitsTable(CD, "CD"+i+": Circular Left shift of CD"+(i-1)+" by "+2,"CD"+i);
       }
-      accumulate_bitstring( "CD["+i+"]: ", CD, 7 );
 
       // create the actual subkey
       permute( KS[i], CD, PC_2_perm );
-      accumulate_bitstring( "KS["+i+"]: ", KS[i], 6 );
-      printBitsTable(KS[i],"K"+i+": After Permute Choice 2","KS"+i)
+      printBitsTable(KS[i],"Key"+i+": After Permute Choice 2","KS"+i)
    }
 
    // handle the initial permutation
    permute( tempData, inData, IP_perm );
-   printBitsTable(tempData,"Initial Permutation","IP");
+   printBitsTable(tempData,"After Initial Permutation","IP");
 
    // split data into L/R parts
    for( i=1; i<=32; i++ )
@@ -451,9 +412,7 @@ function des_encrypt( inData, Key, do_encrypt )
       L[i] = tempData[i];
       R[i] = tempData[i+32];
    }
-   accumulate_bitstring( "L[0]: ", L, 8 );
    printBitsTable(L,"Left[0]","Left0");
-   accumulate_bitstring( "R[0]: ", R, 8 );
    printBitsTable(R,"Right[0]","Right0");
 
    // encrypting or decrypting?
@@ -462,7 +421,6 @@ function des_encrypt( inData, Key, do_encrypt )
       // encrypting
       for( i=1; i<=16; i++ )
       {
-         accumulate_output( "Round " + i );
          des_round( L, R, KS[i], i );
       }
    }
@@ -471,7 +429,6 @@ function des_encrypt( inData, Key, do_encrypt )
       // decrypting
       for( i=16; i>=1; i-- )
       {
-         accumulate_output( "Round " + (17-i) );
          des_round( L, R, KS[i], i );
       }
    }
@@ -483,7 +440,7 @@ function des_encrypt( inData, Key, do_encrypt )
       tempData[i] = R[i];
       tempData[i+32] = L[i];
    }
-   accumulate_bitstring ("LR[16] ", tempData, 8 );
+
    printBitsTable(tempData,"R16 || L16","L_R");
 
    // do final permutation and return result
@@ -492,6 +449,7 @@ function des_encrypt( inData, Key, do_encrypt )
    return result;
 }
 
+//generates a random 64-bit key in HEX
 function generate_hex_key()
 {
    var generated_key = '0123456789abcdef'.split('').map(function(v,i,a){
@@ -508,44 +466,28 @@ function do_des( do_encrypt )
    var inData = new Array( 65 );	// input message bits
    var Key = new Array( 65 );
 
-   accumulated_output_info = "";
-
    // get the message from the user
    // also check if it is ASCII or hex
    get_value( inData, document.stuff.indata.value,
 		document.stuff.destype[0].checked );
 
-   // problems??
-   if ( inData[0] == ERROR_VAL )
-   {
-      document.stuff.details.value = accumulated_output_info;
-      return;
-   }
-   accumulate_bitstring( "Input bits:", inData, 8 );
    printBitsTable(inData,"Input Bits(64)","input_bits");
 
    // get the key from the user
    get_value( Key, document.stuff.key.value, false );
-   // problems??
-   if ( Key[0] == ERROR_VAL )
-   {
-      document.stuff.details.value = accumulated_output_info;
-      return;
-   }
-   accumulate_bitstring( "Key bits:", Key, 8 );
+
    printBitsTable(Key,"Key Bits(64)","key_bits");
 
    // do the encryption/decryption, put output in DES_output for display
    DES_output = des_encrypt( inData, Key, do_encrypt )
 
-   accumulate_bitstring ("Output ", DES_output, 8 );
-
    // process output
    format_DES_output( );
-   document.stuff.details.value = accumulated_output_info;
+
    $('#result').attr("hidden",false);
 }
 
+//Adds HTML elements to print bits in a certain div in a good-looking form with descriptions
 function printBitsTable(bits,title,id){
     var content = "<p>"+title+"</p><table><tr>"
     for(i=1; i<bits.length; i++){
@@ -558,6 +500,7 @@ function printBitsTable(bits,title,id){
     $('#'+id).append(content);
 }
 
+//Adds buttons functionality to show/hide a certain div
 function showSteps(id){
     var isHidden=$('#'+id).attr("hidden");
 
@@ -565,6 +508,7 @@ function showSteps(id){
     else $('#'+id).attr("hidden",true);
 }
 
+//Clears All results
 function clearAll(){
    $('#input_bits').empty();
    $('#key_bits').empty();
@@ -584,77 +528,4 @@ function clearAll(){
       $('#PERM'+i).empty();
       $('#PERMxorL'+i).empty();
    }
-}
-
-// do Triple-DES encrytion/decryption
-// do_encrypt is TRUE for encrypt, FALSE for decrypt
-function do_tdes( do_encrypt )
-{
-   var inData = new Array( 65 );	// input message bits
-   var tempdata = new Array( 65 );	// interm result bits
-   var KeyA = new Array( 65 );
-   var KeyB = new Array( 65 );
-
-   accumulated_output_info = "";
-
-   // get the message from the user
-   // also check if it is ASCII or hex
-   get_value( inData, document.stuff.indata.value,
-		document.stuff.intype[0].checked );
-
-   // problems??
-   if ( inData[0] == ERROR_VAL )
-   {
-      document.stuff.details.value = accumulated_output_info;
-      return;
-   }
-   accumulate_bitstring( "Input bits:", inData, 8 );
-
-   // get the key part A from the user
-   get_value( KeyA, document.stuff.key.value, false );
-   // problems??
-   if ( KeyA[0] == ERROR_VAL )
-   {
-      document.stuff.details.value = accumulated_output_info;
-      return;
-   }
-   accumulate_bitstring( "Key A bits:", KeyA, 8 );
-
-
-   // get the key part B from the user
-   get_value( KeyB, document.stuff.keyb.value, false );
-   // problems??
-   if ( KeyB[0] == ERROR_VAL )
-   {
-      document.stuff.details.value = accumulated_output_info;
-      return;
-   }
-   accumulate_bitstring( "Key B bits:", KeyB, 8 );
-
-   if ( do_encrypt )
-   {
-      // TDES encrypt = DES encrypt/decrypt/encrypt
-      accumulate_output("---- Starting first encryption ----");
-      tempdata = des_encrypt( inData, KeyA, true );
-      accumulate_output("---- Starting second decryption ----");
-      tempdata = des_encrypt( tempdata, KeyB, false );
-      accumulate_output("---- Starting third encryption ----");
-      DES_output = des_encrypt( tempdata, KeyA, true );
-   }
-   else
-   {
-      // TDES decrypt = DES decrypt/encrypt/decrypt
-      accumulate_output("---- Starting first decryption ----");
-      tempdata = des_encrypt( inData, KeyA, false );
-      accumulate_output("---- Starting second encryption ----");
-      tempdata = des_encrypt( tempdata, KeyB, true );
-      accumulate_output("---- Starting third decryption ----");
-      DES_output = des_encrypt( tempdata, KeyA, false );
-   }
-
-   accumulate_bitstring ("Output ", DES_output, 8 );
-
-   // process output
-   format_DES_output( );
-   document.stuff.details.value = accumulated_output_info;
 }
